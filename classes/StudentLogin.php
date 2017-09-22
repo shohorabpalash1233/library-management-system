@@ -31,7 +31,7 @@
 				return $msg;
 			}
 
-			$query = "SELECT * FROM tbl_registration WHERE username = '$username' AND password = '$password' ";
+			$query = "SELECT * FROM tbl_registration WHERE username = '$username' AND password = '$password' AND status = 'yes' ";
 			$result = $this->db->select($query);
 
 			if ($result != false) {
@@ -41,7 +41,7 @@
 				Session::set("stuname", $value['username']);
 				header("Location: index.php");
 			} else {
-				$msg = "<span class='error'>Email and Password Not Matched</span>";
+				$msg = "<span class='error'>Username and Password Not Matched</span>";
 				return $msg;
 			}
 		}
