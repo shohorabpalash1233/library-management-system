@@ -1,3 +1,31 @@
+<?php 
+	include 'lib/Session.php';
+	Session::checkLogin();
+?>
+<?php
+    $filepath = realpath(dirname(__FILE__));
+    include_once ($filepath.'/classes/StudentLogin.php');
+?>
+
+<?php
+    $login = new StudentLogin();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+        $studentLogin = $login->StudentLogin($_POST);
+        
+    }
+?>
+
+<style type="text/css" media="screen">
+    .success{
+        color: green;
+        font-size: 20px;
+    }
+    .error{
+        color: red;
+        font-size: 20px;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +68,7 @@
             </div>
             <div>
 
-                <input class="btn btn-default submit" type="submit" name="submit1" value="Login">
+                <input class="btn btn-default submit" type="submit" name="submit" value="Login">
                 <a class="reset_pass" href="#">Lost your password?</a>
             </div>
 
@@ -48,7 +76,7 @@
 
             <div class="separator">
                 <p class="change_link">New to site?
-                    <a href="registration.html"> Create Account </a>
+                    <a href="registration.php"> Create Account </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -62,10 +90,14 @@
 
 </div>
 
-<div class="alert alert-danger col-lg-6 col-lg-push-3">
-    <strong style="color:white">Invalid</strong> Username Or Password.
-</div>
-
+    <?php
+        if (isset($studentLogin)) {?>
+        <div class="alert alert-success col-lg-6 col-lg-push-3 text-center">
+            <?php echo $studentLogin;?>
+        </div>
+    <?php       
+        }
+    ?>
 
 </body>
 </html>
