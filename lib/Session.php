@@ -31,7 +31,15 @@
       self::init();
       if (self::get("login")== false) {
        self::destroy();
-       header("Location:login.php");
+       header("Location: login.php");
+      }
+     }
+
+     public static function checkAdminSession(){
+      self::init();
+      if (self::get("adminlogin")== false) {
+       self::destroy();
+       header("Location: login.php");
       }
      }
 
@@ -42,9 +50,16 @@
       }
      }
 
+     public static function checkAdminLogin(){
+      self::init();
+      if (self::get("adminlogin")== true) {
+       header("Location: index.php");
+      }
+     }
+
      public static function destroy(){
       session_destroy();
-      header("Location:login.php");
+      header("Location: login.php");
      }
     }
     ?>
