@@ -1,3 +1,18 @@
+<?php 
+    include '../lib/Session.php';
+    Session::checkAdminLogin();
+?>
+<?php
+    $filepath = realpath(dirname(__FILE__));
+    include_once ($filepath.'/../classes/AdminLogin.php');
+?>
+<?php
+    $login = new AdminLogin();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+        $adminLogin = $login->AdminLogin($_POST);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +22,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Student Login Form | LMS </title>
+    <title>Admin Login Form | LMS </title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,8 +44,8 @@
 <div class="login_wrapper">
 
     <section class="login_content">
-        <form name="form1" action="" method="post">
-            <h1>User Login Form</h1>
+        <form name="form" action="" method="post">
+            <h1>Admin Login Form</h1>
 
             <div>
                 <input type="text" name="username" class="form-control" placeholder="Username" required=""/>
@@ -40,7 +55,7 @@
             </div>
             <div>
 
-                <input class="btn btn-default submit" type="submit" name="submit1" value="Login">
+                <input class="btn btn-default submit" type="submit" name="submit" value="Login">
                 <a class="reset_pass" href="#">Lost your password?</a>
             </div>
 
@@ -48,7 +63,7 @@
 
             <div class="separator">
                 <p class="change_link">New to site?
-                    <a href="registration.html"> Create Account </a>
+                    <a href="registration.php"> Create Account </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -62,9 +77,14 @@
 
 </div>
 
-<div class="alert alert-danger col-lg-6 col-lg-push-3">
-    <strong style="color:white">Invalid</strong> Username Or Password.
-</div>
+    <?php
+        if (isset($adminLogin)) {?>
+        <div class="alert alert-success col-lg-6 col-lg-push-3 text-center">
+            <?php echo $adminLogin;?>
+        </div>
+    <?php       
+        }
+    ?>
 
 
 </body>
