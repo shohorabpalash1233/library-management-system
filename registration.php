@@ -95,7 +95,7 @@
 
     </div>
 
-        <?php
+    <?php
         if (isset($studentRegister)) {?>
         <div class="alert alert-success col-lg-6 col-lg-push-3 text-center">
             <?php echo $studentRegister;?>
