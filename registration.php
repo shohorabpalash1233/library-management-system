@@ -1,13 +1,13 @@
 <?php
     $filepath = realpath(dirname(__FILE__));
-    include_once ($filepath.'/classes/Registration.php');
+    include_once ($filepath.'/classes/Student.php');
 ?>
 
 <?php
-    $reg = new Registration();
+    $stu = new Student();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $studentRegister = $reg->studentRegister($_POST);
+        $studentRegister = $stu->studentRegister($_POST);
         
     }
 ?>
